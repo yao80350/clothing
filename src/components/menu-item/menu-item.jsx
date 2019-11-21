@@ -1,7 +1,5 @@
 import React from 'react';
 
-import './menu-item.scss';
-
 const Item = ({section}) => {
     return (
         <div className={`menu-item ${section.size}`}>
