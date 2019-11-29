@@ -1,15 +1,16 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
-const Item = ({section}) => {
+const Item = ({title, imageUrl, size, match, linkUrl, history}) => {
     return (
-        <div className={`menu-item ${section.size}`}>
-            <div className="background-image" style={{backgroundImage: `url(${section.imageUrl})`}}></div>
+        <div className={`menu-item ${size}`} onClick={() => { history.push(`${match.url}${linkUrl}`); }}>
+            <div className="background-image" style={{backgroundImage: `url(${imageUrl})`}}></div>
             <div className="content">
-                <h1 className="title">{section.title}</h1>
+                <h1 className="title">{title}</h1>
                 <span className="subtitle">SHOP NOW</span>
             </div>
         </div>
     );
 };
 
-export default Item;
+export default withRouter(Item);
