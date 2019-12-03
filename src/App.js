@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import './sass/app.scss';
@@ -38,6 +38,7 @@ class App extends React.Component {
     }
 
     render() {
+        const { currentUser } = this.props;
         return (
             <BrowserRouter>
                 <div>
@@ -45,7 +46,7 @@ class App extends React.Component {
                     <Switch>
                         <Route path="/" exact component={HomePage} />
                         <Route path="/shop" exact component={ShopPage} />
-                        <Route path="/signin" exact component={SignInAndSignUp} />
+                        <Route path="/signin" exact render={() => currentUser ? (<Redirect to='/' />) : <SignInAndSignUp />} />
                     </Switch>
                 </div>
             </BrowserRouter>
@@ -53,8 +54,12 @@ class App extends React.Component {
     }
 }
 
+const mapStatesToProps = ({ user }) => (
+    {currentUser: user.currentUser }
+);
+
 const mapDispatchToProps = dipatch => {
     return {setCurrentUser: user => dipatch(setCurrentUser(user))};
 };
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStatesToProps, mapDispatchToProps)(App);
