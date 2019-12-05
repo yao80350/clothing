@@ -6,8 +6,8 @@ class CollectionPerview extends React.Component {
         return (
             this.props.items
             .filter((item, index) => index < 4)
-            .map(({id, ...itemPorps}) => {
-                return <CollectionItem key={id} {...itemPorps} />;
+            .map(item => {
+                return <CollectionItem key={item.id} item={item} />;
             })
         );
     }

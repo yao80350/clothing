@@ -54,7 +54,7 @@ class App extends React.Component {
     }
 }
 
-const mapStatesToProps = ({ user }) => (
+const mapStateToProps = ({ user }) => (
     {currentUser: user.currentUser }
 );
 
@@ -62,4 +62,4 @@ const mapDispatchToProps = dipatch => {
     return {setCurrentUser: user => dipatch(setCurrentUser(user))};
 };
 
-export default connect(mapStatesToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
