@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -9,10 +9,10 @@ import CartIcon from '../cart-icon/cart-icon';
 import CartDropdown from '../cart-dropdown/cart-dropdown';
 import { selectCurrentUser } from '../../redux/selectors/user-selectors';
 
-const Header = ({currentUser}) => (
+const Header = ({currentUser, history}) => (
     <header className="header">
         <Link to="/" className="logo-container">
-            <Logo className="logo"/>
+            <Logo className="logo" onClick={() => history.push('/')} />
         </Link>
         <div className="options">
             <Link to="/shop" className="option">shop</Link>
@@ -31,4 +31,4 @@ const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser
 });
 
-export default connect(mapStateToProps)(Header);
+export default withRouter(connect(mapStateToProps)(Header));
